@@ -11,7 +11,7 @@ Set-ItemProperty 'HKCU:Control Panel\Desktop' Wallpaper "$env:USERPROFILE\temp\w
 
 # Fill desktop with images
 $f = 0
-WHILE($f -lt 500){
+WHILE($f -lt 200){
 cp $env:USERPROFILE\Desktop\YOU_ARE_NEXT.png $env:USERPROFILE\Desktop\YOU_ARE_NEXT_$f.png
 $f++
 }
